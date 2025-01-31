@@ -8,6 +8,10 @@ requirements = []
 path = "contracts/nanotrade.clar"
 depends_on = []
 
+[contracts.nanotrade-ratings]
+path = "contracts/nanotrade-ratings.clar"
+depends_on = []
+
 [repl]
 costs_version = 2
 parser_version = 2
