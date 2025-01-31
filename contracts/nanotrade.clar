@@ -4,6 +4,8 @@
 (define-constant err-not-found (err u101))
 (define-constant err-already-listed (err u102))
 (define-constant err-insufficient-funds (err u103))
+(define-constant err-invalid-price (err u104))
+(define-constant err-invalid-royalty (err u105))
 
 ;; Data structures
 (define-map listings
@@ -27,6 +29,13 @@
 
 ;; Storage
 (define-data-var listing-nonce uint u0)
+
+;; Private functions
+(define-private (validate-listing (price uint) (royalty uint))
+  (begin
+    (asserts! (> price u0) (err err-invalid-price))
+    (asserts! (<= royalty u100) (err err-invalid-royalty))
+    (ok true)))
 
 ;; Public functions
 (define-public (list-innovation (price uint) (description (string-utf8 256)) (royalty uint))
